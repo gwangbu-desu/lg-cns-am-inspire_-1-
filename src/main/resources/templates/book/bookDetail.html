@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Details</title>
+    <link rel="stylesheet" th:href="@{/css/book-details.css}">
+</head>
+<body>
+<h1>Book Details</h1>
+<table>
+    <tr>
+        <th>Field</th>
+        <th>Value</th>
+    </tr>
+    <tr>
+        <td>Book ID</td>
+        <td th:text="${bookDto.bookId}">1</td>
+    </tr>
+    <tr>
+        <td>Title</td>
+        <td th:text="${bookDto.title}">Sample Book Title</td>
+    </tr>
+    <tr>
+        <td>Author</td>
+        <td th:text="${bookDto.author}">John Doe</td>
+    </tr>
+    <tr>
+        <td>Publisher</td>
+        <td th:text="${bookDto.publisher}">Sample Publisher</td>
+    </tr>
+    <tr>
+        <td>Published Date</td>
+        <td th:text="${bookDto.publishedDate}">2022-01-15</td>
+    </tr>
+    <tr>
+        <td>ISBN</td>
+        <td th:text="${bookDto.isbn}">123-456-789</td>
+    </tr>
+    <tr>
+        <td>Description</td>
+        <td th:text="${bookDto.description}">This is a sample book description.</td>
+    </tr>
+    <tr>
+        <td>Created At</td>
+        <td th:text="${bookDto.createdAt}">2022-01-01</td>
+    </tr>
+    <tr>
+        <td>Updated At</td>
+        <td th:text="${bookDto.updatedAt}">2022-12-31</td>
+    </tr>
+</table>
+</body>
+</html>

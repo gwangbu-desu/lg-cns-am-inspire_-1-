@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="kr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book List</title>
+    <link rel="stylesheet" th:href="@{/css/book-list.css}">
+</head>
+<body>
+<header>
+    <h1>Book List</h1>
+</header>
+<div class="container">
+    <table>
+        <thead>
+        <tr>
+            <th>Book ID</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Publisher</th>
+            <th>Published Date</th>
+            <th>ISBN</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="book : ${bookDtoList}">
+            <td th:text="${book.bookId}">1</td>
+            <td th:text="${book.title}">Sample Title</td>
+            <td th:text="${book.author}">John Doe</td>
+            <td th:text="${book.publisher}">Sample Publisher</td>
+            <td th:text="${book.publishedDate}">2022-01-15</td>
+            <td th:text="${book.isbn}">123-456-789</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <!-- Pagination -->
+    <div class="pagination">
+        <!-- Previous 버튼 -->
+        <a th:href="@{|/book/list?page=${currentPage - 1}|}"
+           th:classappend="${currentPage == 1} ? 'disabled'"
+           class="prev">Previous</a>
+
+        <!-- 동적으로 페이지 번호 출력 -->
+        <span th:each="i : ${#numbers.sequence(startPage, endPage)}">
+            <a th:href="@{|/book/list?page=${i}|}"
+               th:text="${i}"
+               th:classappend="${i == currentPage} ? 'active'">
+            </a>
+        </span>
+
+        <!-- Next 버튼 -->
+        <a th:href="@{|/book/list?page=${currentPage + 1}|}"
+           th:classappend="${currentPage == totalPages} ? 'disabled'"
+           class="next">Next</a>
+    </div>
+
+</div>
+<footer class="footer">
+    &copy; 2025 My Book App. All rights reserved.
+</footer>
+</body>
+</html>

@@ -1,0 +1,33 @@
+/* 페이지네이션 */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.pagination a {
+    text-decoration: none;
+    color: #4CAF50;
+    border: 1px solid #ddd;
+    padding: 8px 12px;
+    margin: 0 4px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.pagination a.active {
+    background-color: #4CAF50;
+    color: white;
+    border-color: #4CAF50;
+}
+
+.pagination a.disabled {
+    color: #ccc;
+    pointer-events: none;
+    border-color: #ddd;
+}
+
+.pagination a:hover:not(.disabled) {
+    background-color: #e6f7e6;
+}
