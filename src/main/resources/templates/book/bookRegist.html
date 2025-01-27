@@ -1,10 +1,70 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>도서 등록</title>
+    <link rel="stylesheet" th:href="@{/css/registNewBook.css}">
 </head>
 <body>
-$END$
+<header>
+    <h1>새 도서 등록</h1>
+</header>
+<div class="container">
+    <form th:action="@{/book/registNewBook.do}" method="post" class="book-form" enctype="multipart/form-data">
+        <table>
+            <tr>
+                <td><label for="title">도서 명</label></td>
+                <td><input type="text" id="title" name="title" placeholder="책 제목을 입력하세요" required></td>
+            </tr>
+            <tr>
+                <td><label for="author">작가 명</label></td>
+                <td><input type="text" id="author" name="author" placeholder="작가 이름을 입력하세요" required></td>
+            </tr>
+            <tr>
+                <td><label for="publisher">출판사</label></td>
+                <td><input type="text" id="publisher" name="publisher" placeholder="출판사를 입력하세요" required></td>
+            </tr>
+            <tr>
+                <td><label for="publishedDate">출판일</label></td>
+                <td><input type="date" id="publishedDate" name="publishedDate" placeholder="출판일" required></td>
+            </tr>
+            <tr>
+                <td><label for="isbn">도서번호</label></td>
+                <td><input type="text" id="isbn" name="isbn" placeholder="도서번호를 입력하세요" required></td>
+            </tr>
+            <tr>
+                <td><label for="imageOption">도서 사진</label></td>
+                <td>
+                    <input type="radio" id="urlOption" name="imageOption" value="url" onclick="toggleImageInput('url')" required>
+                    <label for="urlOption">URL 입력</label>
+                    <br>
+                    <input type="radio" id="uploadOption" name="imageOption" value="upload" onclick="toggleImageInput('upload')">
+                    <label for="uploadOption">파일 업로드</label>
+                    <br>
+                    <div id="imageUrlInput" style="display:none;">
+                        <input type="text" id="imageUrl" name="imageUrl" placeholder="도서 사진 경로를 입력하세요">
+                    </div>
+                    <div id="imageUploadInput" style="display:none;">
+                        <input type="file" id="imageUpload" name="imageUpload" accept="image/*">
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <input type="submit" id="submit" value="등록" class="btn">
+    </form>
+</div>
+<script>
+    function toggleImageInput(option) {
+        const urlInput = document.getElementById('imageUrlInput');
+        const uploadInput = document.getElementById('imageUploadInput');
+        if (option === 'url') {
+            urlInput.style.display = 'block';
+            uploadInput.style.display = 'none';
+        } else if (option === 'upload') {
+            urlInput.style.display = 'none';
+            uploadInput.style.display = 'block';
+        }
+    }
+</script>
 </body>
 </html>

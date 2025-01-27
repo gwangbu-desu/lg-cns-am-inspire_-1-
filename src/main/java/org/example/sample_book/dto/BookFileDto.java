@@ -3,7 +3,7 @@ package org.example.sample_book.dto;
 import lombok.Data;
 
 @Data
-public class BoardFileDto {
+public class BookFileDto {
     private int fileId;
     private int bookId;
     private String originalFileName;

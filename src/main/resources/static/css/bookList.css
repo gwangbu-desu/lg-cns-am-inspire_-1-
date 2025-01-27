@@ -31,3 +31,25 @@
 .pagination a:hover:not(.disabled) {
     background-color: #e6f7e6;
 }
+
+/* 새 책 등록 버튼 */
+.add-book {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+}
+
+.add-book a {
+    text-decoration: none;
+    color: white;
+    background-color: #4CAF50;
+    padding: 10px 15px;
+    border-radius: 4px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.add-book a:hover {
+    background-color: #45a049;
+}
+.btn {margin:5px; padding:5px 11px; color:#fff !important; display:inline-block; background-color:#7D7F82; vertical-align:middle; border-radius:0 !important; cursor:pointer; border:none;}

@@ -1,54 +1,79 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="kr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book Details</title>
-    <link rel="stylesheet" th:href="@{/css/book-details.css}">
+    <link rel="stylesheet" th:href="@{/css/bookDetail.css}">
 </head>
-<body>
-<h1>Book Details</h1>
-<table>
-    <tr>
-        <th>Field</th>
-        <th>Value</th>
-    </tr>
-    <tr>
-        <td>Book ID</td>
-        <td th:text="${bookDto.bookId}">1</td>
-    </tr>
-    <tr>
-        <td>Title</td>
-        <td th:text="${bookDto.title}">Sample Book Title</td>
-    </tr>
-    <tr>
-        <td>Author</td>
-        <td th:text="${bookDto.author}">John Doe</td>
-    </tr>
-    <tr>
-        <td>Publisher</td>
-        <td th:text="${bookDto.publisher}">Sample Publisher</td>
-    </tr>
-    <tr>
-        <td>Published Date</td>
-        <td th:text="${bookDto.publishedDate}">2022-01-15</td>
-    </tr>
-    <tr>
-        <td>ISBN</td>
-        <td th:text="${bookDto.isbn}">123-456-789</td>
-    </tr>
-    <tr>
-        <td>Description</td>
-        <td th:text="${bookDto.description}">This is a sample book description.</td>
-    </tr>
-    <tr>
-        <td>Created At</td>
-        <td th:text="${bookDto.createdAt}">2022-01-01</td>
-    </tr>
-    <tr>
-        <td>Updated At</td>
-        <td th:text="${bookDto.updatedAt}">2022-12-31</td>
-    </tr>
-</table>
+<body id="detailFrm">
+    <h1>Book Details</h1>
+    <input type="hidden" name="bookId" th:value="${bookDto.bookId}">
+    <input type="hidden" name="bookImageId" th:value="${bookImageDto.imageId}">
+    <div th:if="${bookImageDto.type == '0'}">
+        <div class="book-image">
+            <img th:src="@{${bookImageDto.imageUrl}}" alt="Book Cover">
+        </div>
+    </div>
+
+
+    <!-- Conditionally show the download button if bookImageDto.type is 1 -->
+    <div th:if="${bookImageDto.type == '1'}">
+<!--        <form th:action="@{/book/download.do}" method="get">-->
+<!--            <input type="hidden" name="bookId" th:value="${bookImageDto.bookId}"/>-->
+<!--            <button type="submit" class="btn">표지 이미지 다운로드</button>-->
+<!--        </form>-->
+        <div class="file">
+            <a th:text="|표지 이미지 다운로드|" th:href="@{/book/download.do(bookId=${bookDto.bookId})}"></a>
+        </div>
+    </div>
+    <table>
+        <tr>
+            <th>Field</th>
+            <th>Value</th>
+        </tr>
+        <tr>
+            <td>도서 제목</td>
+            <td th:text="${bookDto.title}">Sample Book Title</td>
+        </tr>
+        <tr>
+            <td>작가</td>
+            <td th:text="${bookDto.author}">John Doe</td>
+        </tr>
+        <tr>
+            <td>출판사</td>
+            <td th:text="${bookDto.publisher}">Sample Publisher</td>
+        </tr>
+        <tr>
+            <td>출판일</td>
+            <td th:text="${bookDto.publishedDate}">2022-01-15</td>
+        </tr>
+        <tr>
+            <td>도서번호</td>
+            <td th:text="${bookDto.isbn}">123-456-789</td>
+        </tr>
+        <tr>
+            <td>도서 설명</td>
+            <td th:text="${bookDto.description}">This is a sample book description.</td>
+        </tr>
+        <tr>
+            <td>등록일</td>
+            <td th:text="${bookDto.createdAt}">2022-01-01</td>
+        </tr>
+        <tr>
+            <td>수정일</td>
+            <td th:text="${bookDto.updatedAt}">2022-12-31</td>
+        </tr>
+    </table>
+    <form th:action="@{/book/updateBook.do}" method="get">
+        <input type="hidden" name="bookId" th:value="${bookDto.bookId}"/>
+        <button type="submit" class="btn">수정하기</button>
+    </form>
+    <form th:action="@{/book/deleteBook.do}" method="post">
+        <input type="hidden" name="bookId" th:value="${bookDto.bookId}"/>
+        <button type="submit" class="btn">삭제하기</button>
+    </form>
+
+
 </body>
 </html>

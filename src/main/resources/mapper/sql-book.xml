@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.example.sample_book.mapper.BookMapper">
+    <select id="selectAllBooks" parameterType="map" resultType="org.example.sample_book.dto.BookDto">
+        select book_id, title, author, publisher, published_date,isbn, description, created_at,updated_at
+        from Books
+        limit #{limit} offset ${offset};
+    </select>
+    <select id="getTotalRecords" resultType="int">
+        select count(*) from Books
+    </select>
+    <select id="selectBookById" parameterType="int" resultType="org.example.sample_book.dto.BookDto">
+        select * from Books
+        where book_id = #{bookId};
+    </select>
+    <select id="selectBookImageById" parameterType="int" resultType="org.example.sample_book.dto.BookImageDto">
+        select * from BookImages
+        where book_id = #{bookId}
+    </select>
+    <insert id="insertBook" parameterType="org.example.sample_book.dto.BookDto" useGeneratedKeys="true" keyProperty="bookId">
+        insert into Books (title, author, publisher, published_date,isbn, description, created_at)
+        values (#{title},#{author},#{publisher},#{publishedDate},#{isbn},#{description},now());
+    </insert>
+    <insert id="insertBookImage" parameterType="org.example.sample_book.dto.BookImageDto">
+        insert into BookImages(book_id, image_url, created_at, type)
+        values(#{bookId}, #{imageUrl}, now(), #{type});
+    </insert>
+    <update id="updateBook" parameterType="org.example.sample_book.dto.BookDto">
+        update Books
+        set
+            title = #{title},
+            author = #{author},
+            publisher = #{publisher},
+            published_date = #{publishedDate},
+            isbn = #{isbn},
+            description = #{description},
+            updated_at = now()
+        where book_id = #{bookId}
+    </update>
+    <update id="updateBookImage" parameterType="org.example.sample_book.dto.BookImageDto">
+        update BookImages
+        set
+            image_url = #{imageUrl},
+            created_at = #{createdAt},
+            type = #{type}
+        where book_id = #{book_id}
+    </update>
+
+    <delete id="deleteBookById" parameterType="int">
+        delete from Books
+        where book_id = #{bookId}
+    </delete>
+    <delete id="deleteBookImageById" parameterType="int">
+        delete from BookImages
+        where book_id = #{bookId}
+    </delete>
+
+    <select id="selectBookFileInfo" parameterType="int" resultType="org.example.sample_book.dto.BookImageDto">
+        select *
+        from BookImages
+        where book_id = #{bookId}
+    </select>
+</mapper>

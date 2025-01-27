@@ -4,11 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book List</title>
-    <link rel="stylesheet" th:href="@{/css/book-list.css}">
+    <link rel="stylesheet" th:href="@{/css/bookList.css}">
 </head>
 <body>
 <header>
     <h1>Book List</h1>
+    <div class="add-book">
+        <a th:href="@{/book/registNewBook.do}" class="btn-add">새 도서 등록</a>
+    </div>
 </header>
 <div class="container">
     <table>
@@ -25,7 +28,11 @@
         <tbody>
         <tr th:each="book : ${bookDtoList}">
             <td th:text="${book.bookId}">1</td>
-            <td th:text="${book.title}">Sample Title</td>
+<!--            <td th:text="${book.title}">Sample Title</td>-->
+            <td class="title">
+                <a th:text="${book.title}" href="/book/bookDetail.do?bookId="
+                th:attrappend="href=${book.bookId}"></a>
+            </td>
             <td th:text="${book.author}">John Doe</td>
             <td th:text="${book.publisher}">Sample Publisher</td>
             <td th:text="${book.publishedDate}">2022-01-15</td>
@@ -54,7 +61,7 @@
            th:classappend="${currentPage == totalPages} ? 'disabled'"
            class="next">Next</a>
     </div>
-
+<!--    <a href="/book/book/registNewBook.do" class="btn">도서 추가하기</a>-->
 </div>
 <footer class="footer">
     &copy; 2025 My Book App. All rights reserved.

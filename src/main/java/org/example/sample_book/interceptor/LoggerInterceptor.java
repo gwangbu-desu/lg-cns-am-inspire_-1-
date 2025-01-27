@@ -1,4 +1,8 @@
 package org.example.sample_book.interceptor;
 
-public class LoggerInterceptor {
+import org.springframework.web.servlet.HandlerInterceptor;
+
+public class LoggerInterceptor implements HandlerInterceptor {
+//    @Override
+//    public boolean preHandle
 }
